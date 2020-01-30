@@ -1,7 +1,6 @@
 
 /* IMPORT */
 
-import EOL from 'detect-eol';
 import indexAll from 'string-indexes';
 import {TOKEN_TYPE, TOKEN} from './types';
 
@@ -72,12 +71,8 @@ function tokenizer ( css: string ): TOKEN[] {
 
   /* VARIABLES */
 
-  const eol = EOL ( css ),
-        startBracketToken = `{${eol}`,
-        endBracketToken = `}${eol}`,
-        endSemicolonToken = `;${eol}`,
-        startIndexes = indexAll ( css, startBracketToken ),
-        endIndexes = indexAll ( css, endBracketToken ),
+  const startIndexes = indexAll ( css, '{' ),
+        endIndexes = indexAll ( css, '}' ),
         selectorTokens: TOKEN[] = new Array ( startIndexes.length ),
         startTokens: TOKEN[] = new Array ( startIndexes.length ),
         endTokens: TOKEN[] = new Array ( endIndexes.length );
@@ -124,7 +119,7 @@ function tokenizer ( css: string ): TOKEN[] {
 
     let index = ( findStartData[0] >= findEndData[0] ) ? findStartData[0] : findEndData[0],
         selector = css.slice ( index, indexEnd ),
-        semicolonIndex = index + selector.lastIndexOf ( endSemicolonToken, indexEnd ) + 1;
+        semicolonIndex = index + selector.lastIndexOf ( ';', indexEnd ) + 1;
 
     if ( semicolonIndex > index ) {
       index = semicolonIndex;

@@ -10,15 +10,12 @@ A (S)CSS parser that's tiny, blazing fast and (too) simple.
 
 ## Caveats
 
-The _big_ caveat is that this is not a full-blown CSS parser, it can only parse simple CSS strings with the limitations listed below, and it only provides an AST that gives you very little information, but if these limitations aren't a big deal for your use case then you found a tiny and blazing fast parser.
+The _big_ caveat is that this is not a full-blown CSS parser, it can only parse (S)CSS strings with the following limitations:
 
-- Rule blocks' starting `{` characters must be placed at the end of their lines.
-- Rule blocks' closing `}` characters must be placed in their own lines.
-- Significant `;`, `{` and `}` characters must not have any extra whitespace characters after them.
-- Newlines must be used consistently.
-- Adjacent rule blocks can't share any lines.
+- Only rule blocks are supported at the top-level, e.g. no `@charset`, `@import` etc.
+- No `{`, `}` or `;` can be used inside strings, e.g. `div[attr=";{}"]`, `content: "{}"` etc.
 
-Basically this parser only supports simple and ~beautified CSS.
+Lastly, the generated AST is quite crude and might require further processing.
 
 ## Install
 

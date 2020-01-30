@@ -47,7 +47,6 @@
     "tiny"
   ],
   "dependencies": {
-    "detect-eol": "^1.0.0",
     "string-indexes": "^1.0.0"
   },
   "devDependencies": {

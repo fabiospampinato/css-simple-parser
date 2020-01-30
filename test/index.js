@@ -12,7 +12,7 @@ describe ( 'CSS Simple Parser', () => {
 
   describe ( 'parse', it => {
 
-    it ( 'converts a CSS string into an AST', t => { // `Parser.traverse` is being tested implicitly here
+    it ( 'converts beautified CSS strings into an AST', t => { // `Parser.traverse` is being tested implicitly here
 
       const ast = Parser.parse ( INPUT );
 
@@ -23,6 +23,12 @@ describe ( 'CSS Simple Parser', () => {
       });
 
       t.deepEqual ( ast, AST );
+
+    });
+
+    it ( 'supports minified CSS strings too', t => {
+
+      t.is ( minify ( Parser.stringify ( Parser.parse ( OUTPUT ) ) ), OUTPUT );
 
     });
 

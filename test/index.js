@@ -32,6 +32,12 @@ describe ( 'CSS Simple Parser', () => {
 
     });
 
+    it ( 'supports empty CSS blocks', t => {
+
+      t.is ( minify ( Parser.stringify ( Parser.parse ( '.bar{}' ) ) ), '.bar{}' );
+
+    });
+
   });
 
   describe ( 'stringify', it => {

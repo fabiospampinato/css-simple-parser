@@ -77,8 +77,8 @@ function parse ( css: string ): AST {
 
       const node = parent as unknown as NODE; //TSC
 
-      node.indexEnd = token.index + 2;
-      node.bodyIndexEnd = token.index + 1;
+      node.indexEnd = token.index + 1;
+      node.bodyIndexEnd = token.index;
       node.body = getNodeBody ( node, css );
 
       parent = node.parent;

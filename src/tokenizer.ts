@@ -56,7 +56,7 @@ function findSelectorStartIndex ( tokens: TOKEN[], tokenIndexStart = 0, limit: n
 
     if ( index >= limit ) break;
 
-    lastIndex = ( token.type === BODY_START ) ? index : index + 2;
+    lastIndex = ( token.type === BODY_START ) ? index : index + 1;
     lastTokenIndex = i + 1;
 
   }
@@ -87,7 +87,7 @@ function tokenizer ( css: string ): TOKEN[] {
 
     startTokens[startIndex++] = {
       type: BODY_START,
-      index: startIndexes[i] + 1
+      index: startIndexes[i] + 1 // Start index
     };
 
   }
@@ -98,7 +98,7 @@ function tokenizer ( css: string ): TOKEN[] {
 
     endTokens[endIndex++] = {
       type: BODY_END,
-      index: endIndexes[i] - 1
+      index: endIndexes[i] // End index
     };
 
   }

@@ -1,7 +1,7 @@
 {
   "name": "css-simple-parser",
   "description": "A (S)CSS parser that's tiny, blazing fast and (too) simple.",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

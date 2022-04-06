@@ -2,17 +2,18 @@
 /* IMPORT */
 
 import indexAll from 'string-indexes';
-import {TOKEN_TYPE, TOKEN} from './types';
+import {TOKEN_TYPE} from './constants';
+import type {TOKEN} from './types';
 
 const {SELECTOR, BODY_START, BODY_END} = TOKEN_TYPE;
 
-/* MERGE TOKENS */
+/* HELPERS */
 
-function mergeTokensSorted ( t1: TOKEN[], t2: TOKEN[] ): TOKEN[] { // Optimized sorting algorithm for merging presorted token arrays
+const mergeTokensSorted = ( t1: TOKEN[], t2: TOKEN[] ): TOKEN[] => { // Optimized sorting algorithm for merging presorted token arrays
 
-  let length = t1.length + t2.length,
-      i = t1.length - 1,
-      j = t2.length - 1;
+  let length = t1.length + t2.length;
+  let i = t1.length - 1;
+  let j = t2.length - 1;
 
   const merged = new Array ( length );
 
@@ -24,12 +25,12 @@ function mergeTokensSorted ( t1: TOKEN[], t2: TOKEN[] ): TOKEN[] { // Optimized 
 
   return merged;
 
-}
+};
 
-function mergeTokensSortedEvenOdd ( t1: TOKEN[], t2: TOKEN[] ): TOKEN[] { // Optimized sorting algorithim for merging presorted token arrays where "t1[i]" should always be placed before "t2[i]", basically it intertwines the arrays
+const mergeTokensSortedEvenOdd = ( t1: TOKEN[], t2: TOKEN[] ): TOKEN[] => { // Optimized sorting algorithim for merging presorted token arrays where "t1[i]" should always be placed before "t2[i]", basically it intertwines the arrays
 
-  const length = t1.length,
-        merged = new Array ( length * 2 );
+  const length = t1.length;
+  const merged = new Array ( length * 2 );
 
   for ( let i = 0, j = 0; i < length; i++, j += 2 ) {
 
@@ -40,19 +41,17 @@ function mergeTokensSortedEvenOdd ( t1: TOKEN[], t2: TOKEN[] ): TOKEN[] { // Opt
 
   return merged;
 
-}
+};
 
-/* FIND SELECTOR START INDEX */
+const findSelectorStartIndex = ( tokens: TOKEN[], tokenIndexStart = 0, limit: number ): [number, number] => {
 
-function findSelectorStartIndex ( tokens: TOKEN[], tokenIndexStart = 0, limit: number ): [number, number] {
-
-  let lastIndex = 0,
-      lastTokenIndex = tokenIndexStart;
+  let lastIndex = 0;
+  let lastTokenIndex = tokenIndexStart;
 
   for ( let i = tokenIndexStart, l = tokens.length; i < l; i++ ) {
 
-    const token = tokens[i],
-          index = token.index;
+    const token = tokens[i];
+    const index = token.index;
 
     if ( index >= limit ) break;
 
@@ -63,23 +62,23 @@ function findSelectorStartIndex ( tokens: TOKEN[], tokenIndexStart = 0, limit: n
 
   return [lastIndex, lastTokenIndex];
 
-}
+};
 
-/* TOKENIZER */
+/* MAIN */
 
-function tokenizer ( css: string ): TOKEN[] {
+const tokenizer = ( css: string ): TOKEN[] => {
 
   /* VARIABLES */
 
-  const startIndexes = indexAll ( css, '{' ),
-        endIndexes = indexAll ( css, '}' ),
-        selectorTokens: TOKEN[] = new Array ( startIndexes.length ),
-        startTokens: TOKEN[] = new Array ( startIndexes.length ),
-        endTokens: TOKEN[] = new Array ( endIndexes.length );
+  const startIndexes = indexAll ( css, '{' );
+  const endIndexes = indexAll ( css, '}' );
+  const selectorTokens: TOKEN[] = new Array ( startIndexes.length );
+  const startTokens: TOKEN[] = new Array ( startIndexes.length );
+  const endTokens: TOKEN[] = new Array ( endIndexes.length );
 
-  let selectorIndex = 0,
-      startIndex = 0,
-      endIndex = 0;
+  let selectorIndex = 0;
+  let startIndex = 0;
+  let endIndex = 0;
 
   /* BODY_START */
 
@@ -105,21 +104,21 @@ function tokenizer ( css: string ): TOKEN[] {
 
   /* SELECTOR */
 
-  let prevStartTokenIndex = 0,
-      prevEndTokenIndex = 0;
+  let prevStartTokenIndex = 0;
+  let prevEndTokenIndex = 0;
 
   for ( let i = 0, l = startIndexes.length; i < l; i++ ) {
 
-    const indexEnd = startIndexes[i],
-          findStartData = findSelectorStartIndex ( startTokens, prevStartTokenIndex, indexEnd ),
-          findEndData = findSelectorStartIndex ( endTokens, prevEndTokenIndex, indexEnd );
+    const indexEnd = startIndexes[i];
+    const findStartData = findSelectorStartIndex ( startTokens, prevStartTokenIndex, indexEnd );
+    const findEndData = findSelectorStartIndex ( endTokens, prevEndTokenIndex, indexEnd );
 
     prevStartTokenIndex = findStartData[1];
     prevEndTokenIndex = findEndData[1];
 
-    let index = ( findStartData[0] >= findEndData[0] ) ? findStartData[0] : findEndData[0],
-        selector = css.slice ( index, indexEnd ),
-        semicolonIndex = index + selector.lastIndexOf ( ';', indexEnd ) + 1;
+    let index = ( findStartData[0] >= findEndData[0] ) ? findStartData[0] : findEndData[0];
+    let selector = css.slice ( index, indexEnd );
+    let semicolonIndex = index + selector.lastIndexOf ( ';', indexEnd ) + 1;
 
     if ( semicolonIndex > index ) {
       index = semicolonIndex;
@@ -139,7 +138,7 @@ function tokenizer ( css: string ): TOKEN[] {
 
   return mergeTokensSorted ( mergeTokensSortedEvenOdd ( selectorTokens, startTokens ), endTokens );
 
-}
+};
 
 /* EXPORT */
 

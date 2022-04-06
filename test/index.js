@@ -1,12 +1,12 @@
 
 /* IMPORT */
 
-import {describe} from 'ava-spec';
 import minify from 'css-simple-minifier';
-import {default as Parser} from '../dist';
-import {INPUT, OUTPUT, AST} from './fixtures';
+import {describe} from 'fava';
+import Parser from '../dist/index.js';
+import {INPUT, OUTPUT, AST} from './fixtures.js';
 
-/* CSS SIMPLE PARSER */
+/* MAIN */
 
 describe ( 'CSS Simple Parser', () => {
 
@@ -44,8 +44,8 @@ describe ( 'CSS Simple Parser', () => {
 
     it ( 'converts an AST into a CSS string', t => {
 
-      const ast = Parser.parse ( INPUT ),
-            css = Parser.stringify ( ast );
+      const ast = Parser.parse ( INPUT );
+      const css = Parser.stringify ( ast );
 
       t.is ( minify ( css ), OUTPUT );
 

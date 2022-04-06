@@ -1,19 +1,20 @@
 
 /* IMPORT */
 
+import {TOKEN_TYPE} from './constants';
 import tokenizer from './tokenizer';
-import {TOKEN_TYPE, ROOT_NODE, NODE, AST} from './types';
+import type {ROOT_NODE, NODE, AST} from './types';
 
 const {SELECTOR, BODY_START, BODY_END} = TOKEN_TYPE;
 
-/* GET NODE BODY */
+/* HELPERS */
 
-function getNodeBody ( node: NODE, css: string ): string { // Extracting the textual body of a node, excluding children nodes
+const getNodeBody = ( node: NODE, css: string ): string => { // Extracting the textual body of a node, excluding children nodes
 
   const {children} = node;
 
-  let body = '',
-      start = node.bodyIndex;
+  let body = '';
+  let start = node.bodyIndex;
 
   for ( let i = 0, l = children.length; i < l; i++ ) {
 
@@ -29,17 +30,17 @@ function getNodeBody ( node: NODE, css: string ): string { // Extracting the tex
 
   return body;
 
-}
+};
 
-/* PARSE */
+/* MAIN */
 
-function parse ( css: string ): AST {
+const parse = ( css: string ): AST => {
 
-  const tokens = tokenizer ( css ),
-        AST: ROOT_NODE = { parent: null, children: [] };
+  const tokens = tokenizer ( css );
+  const AST: ROOT_NODE = { parent: null, children: [] };
 
-  let parent: ROOT_NODE | NODE = AST,
-      index = 0;
+  let parent: ROOT_NODE | NODE = AST;
+  let index = 0;
 
   while ( true ) {
 
@@ -94,7 +95,7 @@ function parse ( css: string ): AST {
 
   return AST;
 
-}
+};
 
 /* EXPORT */
 

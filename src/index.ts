@@ -5,7 +5,7 @@ import parse from './parse';
 import stringify from './stringify';
 import traverse from './traverse';
 
-/* PARSER */
+/* MAIN */
 
 const Parser = { parse, stringify, traverse };
 

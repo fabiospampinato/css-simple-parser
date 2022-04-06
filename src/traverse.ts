@@ -1,11 +1,11 @@
 
 /* IMPORT */
 
-import {NODE, AST} from './types';
+import type {NODE, AST} from './types';
 
-/* TRAVERSE */
+/* MAIN */
 
-function traverse ( ast: AST | NODE, fn: ( node: NODE ) => any ): void {
+const traverse = ( ast: AST | NODE, fn: ( node: NODE ) => any ): void => {
 
   const {children} = ast;
 
@@ -19,7 +19,7 @@ function traverse ( ast: AST | NODE, fn: ( node: NODE ) => any ): void {
 
   }
 
-}
+};
 
 /* EXPORT */
 

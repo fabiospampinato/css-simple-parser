@@ -1,19 +1,21 @@
 
 /* IMPORT */
 
-const {default: Parser} = require ( '../dist' ),
-      {default: tokenizer} = require ( '../dist/tokenizer' ),
-      {INPUT} = require ( '../test/fixtures' ),
-      benchmark = require ( 'benchloop' );
+import benchmark from 'benchloop';
+import Parser from '../dist/index.js';
+import tokenizer from '../dist/tokenizer.js';
+import {INPUT} from '../test/fixtures.js';
 
-/* BENCHMARK */
+/* HELPERS */
+
+const AST = Parser.parse ( INPUT );
+
+/* MAIN */
 
 benchmark.defaultOptions = Object.assign ( benchmark.defaultOptions, {
   iterations: 10000,
   log: 'compact'
 });
-
-const AST = Parser.parse ( INPUT );
 
 benchmark ({
   name: 'tokenizer',

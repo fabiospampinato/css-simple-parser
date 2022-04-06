@@ -1,19 +1,17 @@
 
 /* IMPORT */
 
-import {NODE, AST} from './types';
+import type {NODE, AST} from './types';
 
-/* STRINGIFY NODE */
+/* HELPERS */
 
-function stringifyNode ( node: NODE ): string {
+const stringifyNode = ( node: NODE ): string => {
 
   return `${node.selector}{${node.body}${stringifyChildren ( node.children )}}`;
 
-}
+};
 
-/* STRINGIFY CHILDREN */
-
-function stringifyChildren ( children: NODE[] ): string {
+const stringifyChildren = ( children: NODE[] ): string => {
 
   let css = '';
 
@@ -25,15 +23,15 @@ function stringifyChildren ( children: NODE[] ): string {
 
   return css;
 
-}
+};
 
-/* STRINGIFY */
+/* MAIN */
 
-function stringify ( ast: AST ): string {
+const stringify = ( ast: AST ): string => {
 
   return stringifyChildren ( ast.children );
 
-}
+};
 
 /* EXPORT */
 

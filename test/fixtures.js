@@ -1,5 +1,5 @@
 
-/* FIXTURES */
+/* MAIN */
 
 const INPUT = `
 input.base,
@@ -1032,4 +1032,4 @@ const AST = {
 
 /* EXPORT */
 
-module.exports = {INPUT, OUTPUT, AST};
+export {INPUT, OUTPUT, AST};

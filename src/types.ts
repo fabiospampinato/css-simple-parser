@@ -1,32 +1,24 @@
 
-/* TOKENS */
-
-enum TOKEN_TYPE {
-  SELECTOR = 1,
-  BODY_START = 2,
-  BODY_END = 3
-}
+/* MAIN */
 
 type TOKEN_SELECTOR = {
-  type: TOKEN_TYPE.SELECTOR,
+  type: 1,
   index: number,
   indexEnd: number,
   selector: string
 };
 
 type TOKEN_BODY_START = {
-  type: TOKEN_TYPE.BODY_START,
+  type: 2,
   index: number
 };
 
 type TOKEN_BODY_END = {
-  type: TOKEN_TYPE.BODY_END,
+  type: 3,
   index: number
 };
 
 type TOKEN = TOKEN_SELECTOR | TOKEN_BODY_START | TOKEN_BODY_END;
-
-/* AST */
 
 type AST = ROOT_NODE;
 
@@ -50,4 +42,4 @@ type NODE = {
 
 /* EXPORT */
 
-export {TOKEN_TYPE, TOKEN_SELECTOR, TOKEN_BODY_START, TOKEN_BODY_END, TOKEN, AST, ROOT_NODE, NODE};
+export type {TOKEN_SELECTOR, TOKEN_BODY_START, TOKEN_BODY_END, TOKEN, AST, ROOT_NODE, NODE};

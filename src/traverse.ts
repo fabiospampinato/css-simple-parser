@@ -5,7 +5,7 @@ import type {NODE, AST} from './types';
 
 /* MAIN */
 
-const traverse = ( ast: AST | NODE, fn: ( node: NODE ) => any ): void => {
+const traverse = ( ast: AST | NODE, fn: ( node: NODE ) => void ): void => {
 
   const {children} = ast;
 

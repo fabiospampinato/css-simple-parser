@@ -14,8 +14,7 @@ The _big_ caveat is that this is not a full-blown CSS parser, it can only parse 
 
 - Only rule blocks are supported at the top-level, e.g. no `@charset`, `@import` etc.
 - No `{`, `}` or `;` can be used inside strings, e.g. `div[attr=";{}"]`, `content: "{}"` etc.
-
-Lastly, the generated AST is quite crude and might require further processing.
+- Lastly, the generated AST is quite crude and might require further processing.
 
 ## Install
 
@@ -68,8 +67,8 @@ This method computes a CSS string given an AST.
 ```ts
 import Parser from 'css-simple-parser';
 
-const ast = Parser.parse ( '.foo {}' ),
-      css = Parser.stringify ( ast );
+const ast = Parser.parse ( '.foo {}' );
+const css = Parser.stringify ( ast );
 ```
 
 ### `Parser.traverse`

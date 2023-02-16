@@ -13,8 +13,7 @@ const AST = Parser.parse ( INPUT );
 /* MAIN */
 
 benchmark.defaultOptions = Object.assign ( benchmark.defaultOptions, {
-  iterations: 10000,
-  log: 'compact'
+  iterations: 10000
 });
 
 benchmark ({

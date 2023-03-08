@@ -12,8 +12,8 @@ const AST = Parser.parse ( INPUT );
 
 /* MAIN */
 
-benchmark.defaultOptions = Object.assign ( benchmark.defaultOptions, {
-  iterations: 10000
+benchmark.config ({
+  iterations: 10_000
 });
 
 benchmark ({

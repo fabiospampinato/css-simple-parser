@@ -19,7 +19,7 @@ The _big_ caveat is that this is not a full-blown CSS parser, it can only parse 
 ## Install
 
 ```sh
-npm install --save css-simple-parser
+npm install css-simple-parser
 ```
 
 ## Usage

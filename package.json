@@ -3,7 +3,7 @@
   "repository": "github:fabiospampinato/css-simple-parser",
   "description": "A (S)CSS parser that's tiny, blazing fast and (too) simple.",
   "license": "MIT",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "type": "module",
   "main": "dist/index.js",
   "exports": "./dist/index.js",
